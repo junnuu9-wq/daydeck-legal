@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Daydeck 이용약관">
+<title>Daydeck 이용약관</title>
+<style>
+  :root {
+    --bg: #F2F3F8;
+    --surface: #FFFFFF;
+    --border: rgba(24,24,42,0.08);
+    --border2: rgba(24,24,42,0.13);
+    --text: #18182A;
+    --text2: #55556E;
+    --text3: #8B8BA6;
+    --purple: #6B63F6;
+    --purple-bg: rgba(107,99,246,0.09);
+    --green: #1CB97A;
+    --amber: #C77D0A;
+    --amber-bg: rgba(240,160,32,0.12);
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --bg: #121220;
+      --surface: #1B1B2E;
+      --border: rgba(255,255,255,0.09);
+      --border2: rgba(255,255,255,0.15);
+      --text: #F0F0F8;
+      --text2: #B4B4CC;
+      --text3: #7C7C98;
+      --purple: #9C95FF;
+      --purple-bg: rgba(156,149,255,0.14);
+      --green: #4ED8A0;
+      --amber: #F0A020;
+      --amber-bg: rgba(240,160,32,0.16);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121220;
+    --surface: #1B1B2E;
+    --border: rgba(255,255,255,0.09);
+    --border2: rgba(255,255,255,0.15);
+    --text: #F0F0F8;
+    --text2: #B4B4CC;
+    --text3: #7C7C98;
+    --purple: #9C95FF;
+    --purple-bg: rgba(156,149,255,0.14);
+    --green: #4ED8A0;
+    --amber: #F0A020;
+    --amber-bg: rgba(240,160,32,0.16);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", "Pretendard", -apple-system, sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
+
+  header.hero {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .mark {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #7B73FF, #5A50F0);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .mark::after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 10px;
+    width: 12px;
+    height: 32px;
+    background: #fff;
+    border-radius: 6px 0 0 6px;
+  }
+  .mark::before {
+    content: "";
+    position: absolute;
+    left: 27px;
+    top: 10px;
+    width: 15px;
+    height: 32px;
+    background: #fff;
+    border-radius: 0 16px 16px 0;
+  }
+
+  .titles h1 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+    color: var(--text2);
+  }
+  .titles p {
+    margin: 2px 0 0;
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: -0.6px;
+  }
+
+  .meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .chip {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--text2);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 6px 12px;
+  }
+  .chip b { color: var(--purple); font-weight: 800; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin-bottom: 20px;
+  }
+
+  .card > p:first-of-type { margin-top: 0; }
+
+  h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    margin: 0 0 16px;
+    text-wrap: balance;
+  }
+  h2 .num {
+    font-family: "DM Mono", ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--purple);
+    background: var(--purple-bg);
+    border-radius: 6px;
+    padding: 3px 7px;
+    letter-spacing: 0;
+  }
+
+  h3 {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: var(--text);
+    margin: 20px 0 8px;
+  }
+  h3:first-of-type { margin-top: 0; }
+
+  p { color: var(--text2); font-size: 14.5px; margin: 0 0 12px; }
+  p:last-child { margin-bottom: 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 4px 0 4px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--text3); font-weight: 700; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.4px; }
+  td { color: var(--text2); }
+  td.k { color: var(--text); font-weight: 700; white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+
+  ul, ol { margin: 8px 0 12px; padding-left: 20px; color: var(--text2); font-size: 14.5px; }
+  li { margin-bottom: 6px; }
+  li:last-child { margin-bottom: 0; }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: var(--amber-bg);
+    color: var(--amber);
+    margin-left: 6px;
+  }
+
+  .note {
+    background: var(--purple-bg);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--text2);
+    margin-top: 4px;
+  }
+  .note b { color: var(--text); }
+
+  .contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .contact .label { font-size: 12px; color: var(--text3); font-weight: 600; }
+  .contact .value { font-size: 16px; font-weight: 800; color: var(--text); }
+  .contact a { color: var(--purple); text-decoration: none; }
+  .contact a:hover { text-decoration: underline; }
+
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text3);
+    margin-top: 40px;
+  }
+
+  @media (max-width: 520px) {
+    .card { padding: 24px 20px; }
+    .wrap { padding: 40px 16px 72px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="mark"></div>
+    <div class="titles">
+      <h1>Daydeck</h1>
+      <p>이용약관</p>
+    </div>
+  </header>
+
+  <div class="meta">
+    <span class="chip">시행일 <b>2026년 9월 1일</b></span>
+    <span class="chip">버전 <b>1.0.0</b></span>
+    <span class="chip">개인 개발 앱</span>
+  </div>
+
+  <div class="card">
+    <p>이 약관은 Daydeck(이하 "앱")의 이용자("회원")와 개발자("운영자") 간 서비스 이용에 관한 조건과 절차, 권리·의무를 정합니다. 회원은 앱을 설치·가입함으로써 이 약관에 동의한 것으로 봅니다.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">01</span> 서비스의 내용</h2>
+    <p>앱은 개인 캘린더, 할 일 관리, 가계부, 그룹(공유) 캘린더 기능을 제공하는 라이프매니지먼트 서비스입니다. 서비스는 기본으로 무료 제공되는 <b style="color:var(--text)">Free</b> 플랜과, 결제를 통해 추가 기능을 이용할 수 있는 <b style="color:var(--text)">Pro</b> 플랜으로 구성됩니다.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">02</span> 회원의 의무</h2>
+    <ul>
+      <li>가입 시 정확한 정보를 제공하고, 계정 정보를 본인 책임 하에 안전하게 관리합니다.</li>
+      <li>타인의 계정을 도용하거나 서비스를 부정한 목적으로 이용하지 않습니다.</li>
+      <li>그룹 기능 이용 시 다른 멤버의 개인정보와 콘텐츠를 존중합니다.</li>
+      <li>관련 법령, 이 약관, 운영자가 공지하는 이용 안내를 준수합니다.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">03</span> 유료 구독(Pro) 서비스<span class="tag">개정</span></h2>
+    <h3>요금 및 결제</h3>
+    <p>Pro 플랜의 정확한 요금·구독 주기(월간/연간 등)는 <b style="color:var(--text)">Google Play 인앱 구매 화면</b>에 표시되는 내용을 기준으로 하며, 이 약관에 구체적인 금액을 명시하지 않습니다. 결제는 Google Play 결제 시스템을 통해 처리되고, 앱과 운영자는 카드번호 등 결제 상세정보를 직접 수집하지 않습니다.</p>
+    <h3>자동 갱신</h3>
+    <p>Pro 구독은 별도로 해지하지 않는 한 매 결제 주기가 끝나는 시점에 자동으로 갱신되며, 갱신 시점에 결제 수단으로 요금이 청구됩니다.</p>
+    <h3>해지</h3>
+    <p>구독 해지는 앱 내 기능이 아닌 <b style="color:var(--text)">Google Play 스토어 앱 &gt; 구독 관리</b> 메뉴에서 언제든지 직접 처리할 수 있습니다. 해지 시 현재 결제 주기가 끝날 때까지는 Pro 기능을 계속 이용할 수 있고, 이후 Free 플랜으로 자동 전환됩니다.</p>
+    <h3>환불</h3>
+    <p>환불은 <b style="color:var(--text)">Google Play 결제 정책</b>을 따릅니다. 결제 후 일정 기간 내 환불 요청은 Google Play 고객센터를 통해 접수하며, 운영자가 직접 환불을 처리하지 않습니다. 다만 서비스 장애 등 운영자 귀책 사유가 있는 경우, 아래 문의처로 연락하면 개별적으로 확인 후 안내합니다.</p>
+    <div class="note">가격, 무료체험 제공 여부 등 세부 조건은 정식 출시 전까지 변경될 수 있으며, 확정되는 대로 이 문서와 앱 내 공지를 통해 안내합니다.</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">04</span> 서비스의 변경·중단</h2>
+    <p>운영자는 서비스 개선을 위해 기능을 추가·변경할 수 있으며, 중대한 변경은 앱 내 공지를 통해 사전 안내합니다. 부득이한 사정으로 서비스 전부 또는 일부를 중단하는 경우에도 사전에 공지하며, 이미 결제된 Pro 구독 기간에 대해서는 관련 법령 및 Google Play 정책에 따라 처리합니다.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">05</span> 계정 해지 및 탈퇴</h2>
+    <p>회원은 설정 &gt; 앱 &gt; 계정 삭제를 통해 언제든지 탈퇴할 수 있습니다. 탈퇴 시 계정 정보와 개인 데이터는 지체 없이 삭제되며, 활성 Pro 구독이 있는 경우 탈퇴 전 Google Play에서 별도로 구독을 해지해야 합니다(계정 삭제가 자동으로 구독을 해지하지 않습니다).</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">06</span> 면책 조항</h2>
+    <p>운영자는 천재지변, 통신 장애 등 불가항력적 사유로 서비스를 제공할 수 없는 경우 책임을 지지 않습니다. 회원이 등록한 일정·가계부 등 콘텐츠의 정확성에 대한 책임은 회원 본인에게 있습니다.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">07</span> 약관의 변경</h2>
+    <p>이 약관이 변경되는 경우 시행일과 변경 내용을 앱 내 공지 또는 이 문서를 통해 사전 안내합니다. 회원이 변경된 약관 시행일 이후에도 서비스를 계속 이용하면 변경에 동의한 것으로 봅니다.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">08</span> 문의처</h2>
+    <div class="contact">
+      <div>
+        <div class="label">이용약관 관련 문의</div>
+        <div class="value">Daydeck 개발자</div>
+      </div>
+      <a href="mailto:junnuu9@gmail.com">junnuu9@gmail.com</a>
+    </div>
+  </div>
+
+  <footer>이 약관은 2026년 9월 1일부터 적용됩니다. 내용 변경 시 앱 내 공지를 통해 안내합니다.</footer>
+</div>
+</body>
+</html>

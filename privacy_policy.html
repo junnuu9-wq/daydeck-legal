@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Daydeck 개인정보처리방침">
+<title>Daydeck 개인정보처리방침</title>
+<style>
+  :root {
+    --bg: #F2F3F8;
+    --surface: #FFFFFF;
+    --border: rgba(24,24,42,0.08);
+    --border2: rgba(24,24,42,0.13);
+    --text: #18182A;
+    --text2: #55556E;
+    --text3: #8B8BA6;
+    --purple: #6B63F6;
+    --purple-bg: rgba(107,99,246,0.09);
+    --green: #1CB97A;
+    --amber: #C77D0A;
+    --amber-bg: rgba(240,160,32,0.12);
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --bg: #121220;
+      --surface: #1B1B2E;
+      --border: rgba(255,255,255,0.09);
+      --border2: rgba(255,255,255,0.15);
+      --text: #F0F0F8;
+      --text2: #B4B4CC;
+      --text3: #7C7C98;
+      --purple: #9C95FF;
+      --purple-bg: rgba(156,149,255,0.14);
+      --green: #4ED8A0;
+      --amber: #F0A020;
+      --amber-bg: rgba(240,160,32,0.16);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121220;
+    --surface: #1B1B2E;
+    --border: rgba(255,255,255,0.09);
+    --border2: rgba(255,255,255,0.15);
+    --text: #F0F0F8;
+    --text2: #B4B4CC;
+    --text3: #7C7C98;
+    --purple: #9C95FF;
+    --purple-bg: rgba(156,149,255,0.14);
+    --green: #4ED8A0;
+    --amber: #F0A020;
+    --amber-bg: rgba(240,160,32,0.16);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", "Pretendard", -apple-system, sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
+
+  header.hero {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .mark {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #7B73FF, #5A50F0);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .mark::after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 10px;
+    width: 12px;
+    height: 32px;
+    background: #fff;
+    border-radius: 6px 0 0 6px;
+  }
+  .mark::before {
+    content: "";
+    position: absolute;
+    left: 27px;
+    top: 10px;
+    width: 15px;
+    height: 32px;
+    background: #fff;
+    border-radius: 0 16px 16px 0;
+  }
+
+  .titles h1 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+    color: var(--text2);
+  }
+  .titles p {
+    margin: 2px 0 0;
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: -0.6px;
+  }
+
+  .meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .chip {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--text2);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 6px 12px;
+  }
+  .chip b { color: var(--purple); font-weight: 800; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin-bottom: 20px;
+  }
+
+  .card > p:first-of-type { margin-top: 0; }
+
+  h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    margin: 0 0 16px;
+    text-wrap: balance;
+  }
+  h2 .num {
+    font-family: "DM Mono", ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--purple);
+    background: var(--purple-bg);
+    border-radius: 6px;
+    padding: 3px 7px;
+    letter-spacing: 0;
+  }
+
+  p { color: var(--text2); font-size: 14.5px; margin: 0 0 12px; }
+  p:last-child { margin-bottom: 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 4px 0 4px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--text3); font-weight: 700; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.4px; }
+  td { color: var(--text2); }
+  td.k { color: var(--text); font-weight: 700; white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+
+  ul { margin: 8px 0 12px; padding-left: 20px; color: var(--text2); font-size: 14.5px; }
+  li { margin-bottom: 6px; }
+  li:last-child { margin-bottom: 0; }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: var(--amber-bg);
+    color: var(--amber);
+    margin-left: 6px;
+  }
+
+  .contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .contact .label { font-size: 12px; color: var(--text3); font-weight: 600; }
+  .contact .value { font-size: 16px; font-weight: 800; color: var(--text); }
+  .contact a { color: var(--purple); text-decoration: none; }
+  .contact a:hover { text-decoration: underline; }
+
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text3);
+    margin-top: 40px;
+  }
+
+  @media (max-width: 520px) {
+    .card { padding: 24px 20px; }
+    .wrap { padding: 40px 16px 72px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="mark"></div>
+    <div class="titles">
+      <h1>Daydeck</h1>
+      <p>개인정보처리방침</p>
+    </div>
+  </header>
+
+  <div class="meta">
+    <span class="chip">시행일 <b>2026년 8월 21일</b></span>
+    <span class="chip">최근 개정 <b>2026년 9월 4일</b></span>
+    <span class="chip">버전 <b>1.2.1</b></span>
+    <span class="chip">개인 개발 앱</span>
+  </div>
+
+  <div class="card">
+    <p>Daydeck(이하 "앱")는 캘린더·할 일·가계부·그룹 캘린더를 한 곳에서 관리하는 개인용 라이프매니지먼트 앱입니다. 이 앱은 개인 개발자가 운영하며, 이용자의 개인정보를 아래와 같이 수집·이용·보관합니다.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">01</span> 수집하는 개인정보 항목</h2>
+    <table>
+      <tr><th>구분</th><th>항목</th><th>수집 시점</th></tr>
+      <tr><td class="k">계정</td><td>이메일 주소, (Google 로그인 시) 프로필 이름·사진</td><td>회원가입 / 로그인</td></tr>
+      <tr><td class="k">프로필</td><td>표시 이름, 아바타 색상, 프로필 사진(선택)</td><td>프로필 설정 시</td></tr>
+      <tr><td class="k">캘린더</td><td>일정 제목·시간·장소, 할 일 내용·완료 여부</td><td>일정/할 일 등록 시</td></tr>
+      <tr><td class="k">가계부</td><td>지출 금액·카테고리·메모, 예산 설정값</td><td>지출 등록 시</td></tr>
+      <tr><td class="k">그룹</td><td>그룹 이름, 초대코드, 공유 일정/할 일, 참여 멤버 목록</td><td>그룹 생성/참여 시</td></tr>
+      <tr><td class="k">기기</td><td>알림 예약을 위한 시간대(timezone) 정보</td><td>앱 실행 시(기기 내 처리)</td></tr>
+      <tr><td class="k">구독<span class="tag">Pro</span></td><td>구독 상태(Free/Pro), 구독 상품 ID, 주문번호 등 결제 처리자가 전달하는 구매 식별 정보</td><td>Pro 구독 신청/갱신/해지 시</td></tr>
+      <tr><td class="k">문자 메시지<span class="tag">Pro</span></td><td>카드·은행 결제로 보이는 문자에서 추출한 결제 금액·가맹점명·결제 일시(문자 원문 자체는 저장하지 않음)</td><td>가계부 자동 입력 기능을 켰을 때만, 결제 문자 수신 시</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">02</span> 수집 방법 및 저장 위치</h2>
+    <p>모든 데이터는 Google Firebase(Firebase Authentication, Cloud Firestore)를 통해 클라우드에 저장됩니다. 일정 알림은 서버로 전송되지 않고 이용자의 기기 안에서 로컬로 예약·발송됩니다.</p>
+    <ul>
+      <li><b style="color:var(--text)">개인 데이터</b>(캘린더·가계부·프로필)는 본인 계정(UID)에만 연결되어 본인만 접근할 수 있습니다.</li>
+      <li><b style="color:var(--text)">그룹 데이터</b>는 초대코드로 참여한 같은 그룹 멤버끼리만 공유됩니다.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">03</span> 이용 목적</h2>
+    <ul>
+      <li>회원 식별 및 로그인 상태 유지</li>
+      <li>캘린더·할 일·가계부·그룹 캘린더 핵심 기능 제공</li>
+      <li>일정 시작 전 알림 발송(기기 내 로컬 처리)</li>
+      <li>서비스 개선 및 오류 대응</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">04</span> 보관 기간</h2>
+    <p>이용자가 계정을 삭제하기 전까지 보관합니다. 설정 화면에서 <b style="color:var(--text)">"계정 삭제"</b>를 요청하면 계정 정보 및 위 항목의 데이터가 지체 없이 삭제됩니다.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">05</span> 구독(Pro) 서비스 관련 정보<span class="tag">개정</span></h2>
+    <p>앱은 일부 기능을 유료 구독(Pro)으로 제공할 예정입니다. 구독 결제는 앱이 직접 처리하지 않고 <b style="color:var(--text)">Google Play 결제 시스템</b>과 구독 관리 서비스인 <b style="color:var(--text)">RevenueCat</b>을 통해 처리됩니다.</p>
+    <ul>
+      <li>카드번호 등 결제 상세정보는 앱과 개발자에게 전달되지 않으며, Google Play가 직접 처리합니다.</li>
+      <li>앱과 RevenueCat은 구독 활성화 여부 확인 및 기능 제공을 위해 구독 상태·상품 ID·주문번호만 전달받습니다.</li>
+      <li>정확한 요금·결제 주기는 인앱 구매 화면(Google Play)에 표시된 내용을 따르며, 확정 전까지 이 문서에 구체적인 가격을 명시하지 않습니다.</li>
+      <li>구독 해지·환불은 Google Play의 구독 관리 메뉴 및 정책을 따릅니다. 자세한 내용은 <a href="https://claude.ai/code/artifact/c0860b27-a4a7-4c7d-8356-ce95ca35da0c" style="color:var(--purple)">이용약관</a>을 참고하세요.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">06</span> 가계부 자동 입력(문자 메시지 접근)<span class="tag">개정</span></h2>
+    <p>가계부 자동 입력(Pro) 기능을 켠 이용자에 한해, 카드사·은행이 보낸 결제 알림 문자를 기기 안에서 분석해 가계부에 자동으로 지출을 기록합니다.</p>
+    <ul>
+      <li>이 기능을 켜지 않으면 앱은 문자 메시지에 전혀 접근하지 않습니다.</li>
+      <li><b style="color:var(--text)">Android</b>에서는 켠 경우에만 문자 접근 권한을 요청하고, 앱이 직접 문자를 읽습니다.</li>
+      <li><b style="color:var(--text)">iOS</b>는 앱이 문자 내용을 직접 읽을 수 있는 방법을 제공하지 않아서, 이용자가 기기의 "단축어" 앱에 직접 설정한 개인 자동화가 결제로 보이는 문자를 감지했을 때만 그 문자 내용을 앱에 전달합니다. 이 설정을 하지 않으면 iOS에서는 이 기능이 동작하지 않습니다.</li>
+      <li>문자 원문은 <b style="color:var(--text)">기기 밖으로 전송되지 않습니다</b>. 결제로 보이는 문자(금액·"승인"·"결제" 등의 표현 포함)만 기기 안에서 걸러지고, 그 문자에서 추출한 <b style="color:var(--text)">금액·가맹점명·결제 일시</b>만 가계부 항목으로 저장됩니다.</li>
+      <li>결제와 무관한 문자(개인 대화, 인증번호 등)는 걸러져서 저장되지 않으며, 결제로 보이는 문자도 원문 자체는 처리 즉시 버려지고 서버로 전송되지 않습니다.</li>
+      <li>자동으로 추가된 항목은 "자동" 표시가 붙으며, 다른 지출과 동일하게 직접 수정·삭제할 수 있습니다.</li>
+      <li>설정 &gt; 가계부에서 이 기능을 언제든지 끌 수 있고, 끄면 이후 문자는 더 이상 처리되지 않습니다.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">07</span> 제3자 제공 및 처리 위탁</h2>
+    <p>앱은 개인정보를 광고·마케팅 목적으로 제3자에게 판매하거나 제공하지 않습니다. 다만 서비스 운영을 위해 아래 업체에 처리를 위탁합니다.</p>
+    <table>
+      <tr><th>수탁업체</th><th>위탁 업무</th></tr>
+      <tr><td class="k">Google Firebase</td><td>계정 인증, 데이터베이스 저장</td></tr>
+      <tr><td class="k">Google Sign-In</td><td>Google 계정을 통한 로그인(선택 시)</td></tr>
+      <tr><td class="k">Google Play 결제 시스템<span class="tag">Pro</span></td><td>Pro 구독 결제 처리(카드 정보 등은 앱에 전달되지 않음)</td></tr>
+      <tr><td class="k">RevenueCat<span class="tag">Pro</span></td><td>구독 상태 확인 및 관리</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">08</span> 이용자의 권리</h2>
+    <p>이용자는 언제든지 아래 권리를 행사할 수 있습니다.</p>
+    <ul>
+      <li>본인 데이터 열람 — 앱 내 각 화면에서 직접 확인</li>
+      <li>수정 — 프로필, 일정, 지출 등 직접 편집/삭제</li>
+      <li>계정 및 전체 데이터 삭제 — 설정 &gt; 앱 &gt; 계정 삭제</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">09</span> 만 14세 미만 아동</h2>
+    <p>이 앱은 만 14세 미만 아동을 대상으로 하지 않으며, 이를 알면서 아동의 개인정보를 수집하지 않습니다.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">10</span> 문의처</h2>
+    <div class="contact">
+      <div>
+        <div class="label">개인정보 관련 문의</div>
+        <div class="value">Daydeck 개발자</div>
+      </div>
+      <a href="mailto:junnuu9@gmail.com">junnuu9@gmail.com</a>
+    </div>
+  </div>
+
+  <footer>이 방침은 2026년 8월 21일부터 적용되며, 2026년 9월 1일 구독(Pro) 서비스 관련 조항이, 2026년 9월 4일 가계부 자동 입력(문자 메시지 접근) 관련 조항이 추가되었습니다. 내용 변경 시 앱 내 공지를 통해 안내합니다.</footer>
+</div>
+</body>
+</html>
