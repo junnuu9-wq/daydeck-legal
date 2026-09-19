@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Daydeck 그룹 초대">
+<meta name="robots" content="noindex">
+<title>Daydeck 그룹 초대</title>
+<style>
+  :root {
+    --bg: #F2F3F8;
+    --surface: #FFFFFF;
+    --border: rgba(24,24,42,0.08);
+    --text: #18182A;
+    --text2: #55556E;
+    --text3: #8B8BA6;
+    --purple: #6B63F6;
+    --green: #2FBF8F;
+    --greenBg: rgba(47,191,143,0.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121220;
+      --surface: #1B1B2E;
+      --border: rgba(255,255,255,0.09);
+      --text: #F0F0F8;
+      --text2: #B4B4CC;
+      --text3: #7C7C98;
+      --purple: #9C95FF;
+      --green: #4FD8AA;
+      --greenBg: rgba(79,216,170,0.12);
+    }
+  }
+  * { box-sizing: border-box; }
+  /* ⚠️ 이 줄을 지우지 말 것.
+     브라우저 기본 스타일 [hidden]{display:none} 은 우선순위가 가장 낮아서
+     아래 .btn{display:block} 같은 클래스 규칙에 그냥 진다. 그러면 JS 로
+     hidden 을 걸어둔 버튼이 화면에 그대로 남는다(실제로 초대코드 없는
+     링크에서 '앱에서 열기' 버튼이 노출되는 버그가 났음). */
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    padding: 40px 20px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 480px; margin: 0 auto; }
+  .mark {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--purple); margin-bottom: 20px;
+  }
+  h1 { font-size: 1.5rem; margin: 0 0 6px; letter-spacing: -0.02em; }
+  .sub { color: var(--text3); margin: 0 0 24px; font-size: 0.95rem; }
+
+  .code-card {
+    background: var(--greenBg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 18px 20px; margin-bottom: 14px;
+    text-align: center;
+  }
+  .code-label { font-size: 0.75rem; color: var(--text3); font-weight: 600; }
+  .code {
+    font-size: 2rem; font-weight: 800; letter-spacing: 0.18em;
+    margin-top: 4px; word-break: break-all;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  .btn {
+    display: block; width: 100%; padding: 15px 20px; margin-bottom: 10px;
+    border: 0; border-radius: 14px; text-align: center;
+    font-size: 1rem; font-weight: 700; text-decoration: none;
+    cursor: pointer; font-family: inherit;
+  }
+  .btn-primary { background: var(--purple); color: #fff; }
+  .btn-sub {
+    background: var(--surface); color: var(--text);
+    border: 1px solid var(--border); font-weight: 600; font-size: 0.95rem;
+  }
+
+  .steps {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px 20px; margin-top: 18px;
+    color: var(--text2); font-size: 0.9rem;
+  }
+  .steps b { color: var(--text); }
+  .steps ol { margin: 8px 0 0; padding-left: 20px; }
+  .steps li { margin-bottom: 4px; }
+
+  .hint { color: var(--text3); font-size: 0.82rem; margin: 14px 2px 0; }
+  footer { margin-top: 28px; color: var(--text3); font-size: 0.85rem; }
+  footer a { color: var(--purple); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mark"></div>
+  <h1>Daydeck 그룹 초대</h1>
+  <p class="sub" id="sub">아래 초대코드로 그룹에 참여할 수 있어요.</p>
+
+  <div class="code-card" id="codeCard" hidden>
+    <div class="code-label">초대코드</div>
+    <div class="code" id="code"></div>
+  </div>
+
+  <a class="btn btn-primary" id="openApp" href="#" hidden>Daydeck 앱에서 열기</a>
+  <a class="btn btn-sub" id="store" href="#" hidden>앱 설치하기</a>
+
+  <div class="steps" id="steps">
+    <b>앱에서 직접 참여하려면</b>
+    <ol>
+      <li>Daydeck 앱을 엽니다</li>
+      <li><b>그룹</b> 탭 → <b>그룹 참여</b></li>
+      <li>위 초대코드를 입력합니다</li>
+    </ol>
+  </div>
+
+  <p class="hint" id="hint"></p>
+
+  <footer>
+    <a href="./">Daydeck 약관 및 정책</a>
+  </footer>
+</div>
+
+<script>
+(function () {
+  // 초대코드는 URL에서 그대로 오는 값이라 화면에 넣기 전에 형식을 검사한다.
+  // 영숫자만 허용 + textContent 로만 넣어서 스크립트가 섞여 들어올 여지를 없앤다.
+  var raw = new URLSearchParams(location.search).get('code') || '';
+  var code = /^[A-Za-z0-9]{4,16}$/.test(raw) ? raw.toUpperCase() : '';
+
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+              (/Mac/.test(ua) && navigator.maxTouchPoints > 1); // iPadOS 는 Mac 으로 보고함
+  var isAndroid = /Android/.test(ua);
+  var storeUrl = isAndroid
+    ? 'https://play.google.com/store/apps/details?id=com.daydeck.daydeck'
+    : 'https://apps.apple.com/app/id6809481724';
+
+  var hint = document.getElementById('hint');
+  var storeBtn = document.getElementById('store');
+  storeBtn.href = storeUrl;
+  storeBtn.hidden = false;
+
+  if (!code) {
+    // 코드가 없으면 "아래 초대코드", "위 초대코드를 입력합니다" 같은
+    // 있지도 않은 값을 가리키는 안내가 남는다 — 그 부분을 통째로 치운다.
+    document.getElementById('sub').textContent =
+      '이 링크에서는 참여할 그룹을 확인할 수 없어요.';
+    document.getElementById('steps').hidden = true;
+    hint.textContent = '초대코드가 없는 링크예요. 초대한 분께 링크를 다시 받아주세요.';
+    return;
+  }
+
+  document.getElementById('code').textContent = code;
+  document.getElementById('codeCard').hidden = false;
+
+  // 데스크톱 브라우저에는 앱이 없으므로 "앱에서 열기"를 아예 안 보여준다.
+  // (커스텀 스킴을 열려고 하면 브라우저가 오류 대화상자를 띄운다.)
+  if (!isIOS && !isAndroid) {
+    hint.textContent = '휴대폰에서 이 링크를 열면 앱으로 바로 참여할 수 있어요.';
+    return;
+  }
+
+  var scheme = 'daydeck://invite/' + encodeURIComponent(code);
+  var openBtn = document.getElementById('openApp');
+  openBtn.hidden = false;
+
+  openBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    // ⚠️ 스토어 자동 이동은 안드로이드에서만 한다.
+    //
+    // iOS 는 커스텀 스킴을 열기 전에 "'Daydeck'에서 열겠습니까?" 확인창을
+    // 먼저 띄운다. 여기서 타이머를 돌리면 사용자가 그 창을 읽는 동안
+    // 타이머가 터져서 페이지를 앱스토어로 끌고 가버릴 수 있다.
+    // (시뮬레이터에선 확인창이 떠 있는 동안 JS 타이머가 멈춰서 안 터졌지만,
+    //  보장된 동작이 아니라 기대지 않는다. iOS 는 아래 '앱 설치하기'
+    //  버튼으로 충분하다.)
+    //
+    // 안드로이드는 확인창 없이 조용히 실패하므로 자동 이동이 실제로 쓸모 있다.
+    if (isAndroid) {
+      var start = Date.now();
+      var timer = setTimeout(function () {
+        if (document.visibilityState === 'visible' && Date.now() - start < 2500) {
+          location.href = storeUrl;
+        }
+      }, 1200);
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'hidden') clearTimeout(timer);
+      }, { once: true });
+    }
+
+    location.href = scheme;
+  });
+
+  hint.textContent = '앱이 열리지 않으면 위 초대코드를 앱에서 직접 입력해주세요.';
+})();
+</script>
+</body>
+</html>
