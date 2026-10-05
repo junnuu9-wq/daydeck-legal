@@ -107,6 +107,7 @@
   </div>
 
   <a class="btn btn-primary" id="openApp" href="#" hidden>Daydeck 앱에서 열기</a>
+  <a class="btn btn-sub" id="openWeb" href="#" hidden>앱 없이 웹에서 참여하기</a>
   <a class="btn btn-sub" id="store" href="#" hidden>앱 설치하기</a>
 
   <div class="steps" id="steps">
@@ -158,10 +159,21 @@
   document.getElementById('code').textContent = code;
   document.getElementById('codeCard').hidden = false;
 
+  // 앱 없이 웹(daydeck.kr)에서 참여 — 가입·로그인하면 바로 "참여할까요?"가 뜬다.
+  // 앱이 없는 사람, PC(카카오톡 PC 등)에서 링크를 연 사람의 길이다.
+  // 받는 쪽: Daydeck 앱 저장소 lib/features/team/invite_link.dart 가 ?invite= 를 읽는다
+  // (?code= 가 아닌 이유도 거기 — OAuth 같은 다른 흐름이 쓰는 이름이라서).
+  var webBtn = document.getElementById('openWeb');
+  webBtn.href = 'https://daydeck.kr/?invite=' + encodeURIComponent(code);
+  webBtn.hidden = false;
+
   // 데스크톱 브라우저에는 앱이 없으므로 "앱에서 열기"를 아예 안 보여준다.
   // (커스텀 스킴을 열려고 하면 브라우저가 오류 대화상자를 띄운다.)
+  // 대신 웹 참여가 첫째 길이다 — 예전엔 PC 에서 열면 "휴대폰에서 열어 주세요"뿐이라 막혔다.
   if (!isIOS && !isAndroid) {
-    hint.textContent = '휴대폰에서 이 링크를 열면 앱으로 바로 참여할 수 있어요.';
+    webBtn.className = 'btn btn-primary';
+    webBtn.textContent = '웹에서 바로 참여하기';
+    hint.textContent = '휴대폰 앱으로 참여하려면 휴대폰에서 이 링크를 열어주세요.';
     return;
   }
 
