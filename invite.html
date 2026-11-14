@@ -93,6 +93,7 @@
   .hint { color: var(--text3); font-size: 0.82rem; margin: 14px 2px 0; }
   footer { margin-top: 28px; color: var(--text3); font-size: 0.85rem; }
   footer a { color: var(--purple); }
+  .copy { margin-top: 10px; padding: 8px 14px; border: 1px solid currentColor; border-radius: 10px; background: transparent; color: inherit; font: inherit; font-size: 13px; font-weight: 700; opacity: .75; }
 </style>
 </head>
 <body>
@@ -104,11 +105,22 @@
   <div class="code-card" id="codeCard" hidden>
     <div class="code-label">초대코드</div>
     <div class="code" id="code"></div>
+    <!-- 코드를 손으로 옮겨 적지 않게 — 앱의 「그룹 참여」 칸에 붙여 넣는다. -->
+    <button type="button" class="copy" id="copy">초대코드 복사</button>
   </div>
 
   <a class="btn btn-primary" id="openApp" href="#" hidden>Daydeck 앱에서 열기</a>
   <a class="btn btn-sub" id="openWeb" href="#" hidden>앱 없이 웹에서 참여하기</a>
   <a class="btn btn-sub" id="store" href="#" hidden>앱 설치하기</a>
+
+  <!-- 앱이 아직 없는 사람(휴대폰) — 설치하면 초대코드가 앱으로 넘어가지 않는다. 웹에서 먼저 참여해 두는 길을 알려 준다. -->
+  <div class="steps" id="noApp" hidden>
+    <b>앱이 아직 없다면</b>
+    <ol>
+      <li><b>앱 없이 웹에서 참여하기</b>로 먼저 참여해 두세요</li>
+      <li>앱을 설치하고 <b>같은 계정</b>으로 로그인하면 그룹에 이미 들어와 있어요</li>
+    </ol>
+  </div>
 
   <div class="steps" id="steps">
     <b>앱에서 직접 참여하려면</b>
@@ -159,6 +171,25 @@
   document.getElementById('code').textContent = code;
   document.getElementById('codeCard').hidden = false;
 
+  // 안드로이드 — 플레이 스토어 주소에 초대코드를 실어 보낸다(설치 리퍼러). 앱이 설치 뒤 처음 켜질 때 이 값을 읽어
+  // 가입이 끝나면 "참여할까요?"를 묻는다(이 값을 읽는 앱 판은 준비 중 — 그 전 판은 이 값을 그냥 무시한다).
+  // 아이폰에는 이런 길이 없다 — 그래서 아래 "앱이 아직 없다면"(웹에서 먼저 참여)을 같이 보여 준다.
+  if (isAndroid) {
+    storeUrl += '&referrer=' + encodeURIComponent('invite=' + code);
+    storeBtn.href = storeUrl;
+  }
+
+  // 초대코드 복사.
+  var copyBtn = document.getElementById('copy');
+  copyBtn.addEventListener('click', function () {
+    var done = function () { copyBtn.textContent = '복사했어요'; setTimeout(function () { copyBtn.textContent = '초대코드 복사'; }, 2000); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(code).then(done, function () { copyBtn.textContent = '길게 눌러 복사해 주세요'; });
+    } else {
+      copyBtn.textContent = '길게 눌러 복사해 주세요';
+    }
+  });
+
   // 앱 없이 웹(daydeck.kr)에서 참여 — 가입·로그인하면 바로 "참여할까요?"가 뜬다.
   // 앱이 없는 사람, PC(카카오톡 PC 등)에서 링크를 연 사람의 길이다.
   // 받는 쪽: Daydeck 앱 저장소 lib/features/team/invite_link.dart 가 ?invite= 를 읽는다
@@ -176,6 +207,8 @@
     hint.textContent = '휴대폰 앱으로 참여하려면 휴대폰에서 이 링크를 열어주세요.';
     return;
   }
+
+  document.getElementById('noApp').hidden = false; // 휴대폰에서만(PC 는 위에서 웹 참여가 첫째 길로 끝났다)
 
   var scheme = 'daydeck://invite/' + encodeURIComponent(code);
   var openBtn = document.getElementById('openApp');
